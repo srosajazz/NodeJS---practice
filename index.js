@@ -1,8 +1,17 @@
-const http = require("http");
+const express = require("express");
 
-http
-  .createServer((req, res) => {
-    console.log(req);
-    return res.end("Hello World");
-  })
-  .listen(3003);
+const app = express();
+
+app.get("/", (req, res) => {
+  return res.send(`Welcome, ${req.query.name}`);
+});
+
+app.get("/name/:name", (req, res) => {
+  //   return res.send(`Welcome, ${req.params.name}`);
+  // });
+  return res.json({
+    message: `Welcome, ${req.params.name}`
+  });
+});
+
+app.listen(3003);
